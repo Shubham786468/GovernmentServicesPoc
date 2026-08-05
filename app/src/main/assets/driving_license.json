@@ -1,0 +1,28 @@
+{
+  "screenId": "driving_license",
+  "title": "Driving License Application",
+
+  "workflow": [
+    "AGE_VERIFICATION",
+    "DOCUMENT_CHECK",
+    "LICENSE_APPROVAL"
+  ],
+
+  "fields": [
+    {
+      "id": "fullName",
+      "label": "Full Name",
+      "type": "text"
+    },
+    {
+      "id": "dateOfBirth",
+      "label": "Date Of Birth",
+      "type": "text"
+    },
+	{
+      "id": "hSMarksheet",
+      "label": "High School Marksheet",
+      "type": "text"
+    }
+  ]
+}

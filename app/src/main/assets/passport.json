@@ -1,0 +1,147 @@
+{
+  "screenId": "passport",
+  "title": "Passport Application",
+
+  "appFunctions": [
+    "verifyPassportDocuments",
+    "submitPassportApplication",
+    "checkPassportApplicationStatus",
+    "schedulePassportPoliceVerification",
+    "generatePassportAcknowledgement"
+  ],
+
+  "workflow": [
+    "DOCUMENT_CHECK",
+    "POLICE_VERIFICATION",
+    "PASSPORT_APPROVAL",
+    "PASSPORT_SUBMISSION"
+  ],
+
+  "actions": [
+    {
+      "id": "submit",
+      "type": "primary",
+      "label": "Submit Application",
+      "appFunction": "submitPassportApplication"
+    },
+    {
+      "id": "verify",
+      "type": "secondary",
+      "label": "Verify Documents",
+      "appFunction": "verifyDocuments"
+    },
+    {
+      "id": "policeVerification",
+      "type": "secondary",
+      "label": "Schedule Police Verification",
+      "appFunction": "schedulePoliceVerification"
+    },
+    {
+      "id": "status",
+      "type": "secondary",
+      "label": "Check Status",
+      "appFunction": "checkApplicationStatus"
+    },
+    {
+      "id": "acknowledgement",
+      "type": "secondary",
+      "label": "Generate Acknowledgement",
+      "appFunction": "generateAcknowledgement"
+    }
+  ],
+
+  "fields": [
+    {
+      "id": "fullName",
+      "label": "Full Name",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^[A-Za-z ]+$",
+        "errorMessage": "Name should contain only letters"
+      }
+    },
+    {
+      "id": "dateOfBirth",
+      "label": "Date of Birth",
+      "type": "date",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/([0-9]{4})$",
+        "errorMessage": "Date must be in DD/MM/YYYY format"
+      }
+    },
+    {
+      "id": "gender",
+      "label": "Gender",
+      "type": "dropdown",
+      "required": true,
+      "validation": {
+        "required": true,
+        "errorMessage": "Please select a gender"
+      },
+      "options": [
+        "Male",
+        "Female",
+        "Other"
+      ]
+    },
+    {
+      "id": "address",
+      "label": "Residential Address",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^[A-Za-z0-9,./#() -]{5,200}$",
+        "errorMessage": "Please enter a valid address"
+      }
+    },
+    {
+      "id": "nationality",
+      "label": "Nationality",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^[A-Za-z ]+$",
+        "errorMessage": "Nationality should contain only letters"
+      }
+    },
+    {
+      "id": "aadhaar",
+      "label": "Aadhaar Number",
+      "type": "number",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^\\d{12}$",
+        "errorMessage": "Aadhaar must be exactly 12 digits"
+      }
+    },
+    {
+      "id": "mobileNumber",
+      "label": "Mobile Number",
+      "type": "number",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^[6-9]\\d{9}$",
+        "errorMessage": "Mobile number must be 10 digits"
+      }
+    },
+    {
+      "id": "email",
+      "label": "Email Address",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "required": true,
+        "regex": "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+        "errorMessage": "Invalid email address"
+      }
+    }
+  ]
+}

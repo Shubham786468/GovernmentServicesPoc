@@ -1,0 +1,109 @@
+{
+  "screenId": "income_certificate",
+  "title": "Income Certificate Application",
+  "appFunctions": [
+
+    "verifyIncomeEligibility",
+
+    "submitIncomeCertificate",
+
+    "checkApplicationStatus",
+
+    "generateCertificate"
+  ],
+  "workflow":[
+    "ELIGIBILITY",
+    "VERIFICATION",
+    "APPROVAL",
+    "SUBMIT"
+  ],
+  "actions": [
+    {
+      "id": "submit",
+	  "type":"primary",
+      "label": "Submit Application",
+      "appFunction": "submitIncomeCertificate"
+    },
+	
+	{
+	  "id": "verify",
+	  "label": "Verify Eligibility",
+	  "type": "secondary",
+	  "appFunction": "verifyIncomeEligibility"
+	},
+
+    {
+      "id": "status",
+	  "type":"secondary",
+      "label": "Check Status",
+      "appFunction": "checkApplicationStatus"
+    },
+	
+	{
+	  "id":"certificate",
+	  "type":"secondary",
+	  "label":"Generate Certificate",
+	  "appFunction":"generateCertificate"
+	}
+  ],
+  "fields": [
+    {
+      "id": "fullName",
+      "label": "Full Name",
+      "type": "text",
+      "required": true,
+	  "validation": {
+		"required": true,
+		"regex": "^[A-Za-z ]+$",
+		"errorMessage": "Name should contain only letters"
+		}
+    },
+    {
+      "id": "aadhaar",
+      "label": "Aadhaar Number",
+      "type": "text",
+      "required": true,
+	  "validation": {
+		"required": true,
+		"regex": "^\\d{12}$",
+		"errorMessage": "Aadhaar must be exactly 12 digits"
+		}
+    },
+    {
+      "id": "annualIncome",
+      "label": "Annual Income",
+      "type": "number",
+      "required": true,
+	  "validation": {
+		"required": true,
+		"regex": "^\\d+(\\.\\d{1,2})?$",
+		"errorMessage": "Annual Income should contain numbers onlys"
+		}
+    },
+    {
+      "id": "panCard",
+      "label": "Pan Card",
+      "type": "text",
+      "required": true,
+	  "validation": {
+		"required": true,
+		"regex": "^[A-Z]{5}[0-9]{4}[A-Z]$",
+		"errorMessage": "Invalid PAN format"
+		}
+    },
+    {
+	  "id": "gender",
+	  "label": "Gender",
+	  "type": "dropdown",
+	  "validation": {
+	    "required": true,
+	    "errorMessage": "Please select a gender"
+    	},
+   	  "options": [
+		"Male",
+		"Female",
+		"Other"
+	  ]
+	}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "screenId": "pension",
+  "title": "Pension Application",
+
+  "workflow": [
+    "SERVICE_VERIFICATION",
+    "RETIREMENT_CHECK",
+    "APPROVAL"
+  ],
+
+  "fields": [
+    {
+      "id": "employeeId",
+      "label": "Employee ID",
+      "type": "text"
+    },
+    {
+      "id": "yearsOfService",
+      "label": "Years Of Service",
+      "type": "number"
+    }
+  ]
+}

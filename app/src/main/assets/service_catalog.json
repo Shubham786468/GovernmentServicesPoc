@@ -1,0 +1,28 @@
+{
+  "services": [
+    {
+      "id":"income_certificate",
+      "keywords":[
+        "income",
+        "salary",
+        "earnings"
+      ]
+    },
+
+    {
+      "id":"passport",
+      "keywords":[
+        "passport",
+        "travel"
+      ]
+    },
+
+    {
+      "id":"pension",
+      "keywords":[
+        "retirement",
+        "pension"
+      ]
+    }
+  ]
+}
