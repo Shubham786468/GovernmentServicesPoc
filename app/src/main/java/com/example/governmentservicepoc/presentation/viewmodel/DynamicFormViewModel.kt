@@ -3,6 +3,7 @@ package com.example.governmentservicepoc.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.governmentservicepoc.appfunctions.AppFunctionRegistry
+import com.example.governmentservicepoc.data.repository.MetadataRepositoryImpl
 import com.example.governmentservicepoc.domain.agents.ui.UiAndWorkflowOrchestrator
 import com.example.governmentservicepoc.domain.model.Field
 import com.example.governmentservicepoc.domain.model.FormState
@@ -52,12 +53,6 @@ class DynamicFormViewModel @Inject constructor(
     private val _snackbarMessage = MutableSharedFlow<String>()
     val snackbarMessage = _snackbarMessage.asSharedFlow()
 
-    /**
-     * First load the JSON from ADK and A2UI & AGenUi.
-     */
-//    init {
-//        loadScreen("Apply for Income Certificate")
-//    }
 
     fun loadScreen(prompt: String) {
 
@@ -78,16 +73,6 @@ class DynamicFormViewModel @Inject constructor(
             }
         }
     }
-
-//    fun updateValue(
-//        key: String, value: String
-//    ) {
-//        val currentValues = _formState.value.values.toMutableMap()
-//
-//        currentValues[key] = value
-//
-//        _formState.value = FormState(values = currentValues)
-//    }
 
     fun updateField(field: Field, value: String) {
 
@@ -211,46 +196,5 @@ class DynamicFormViewModel @Inject constructor(
 //    fun getFormValues(): Map<String, String> {
 //        return _formState.value.values
 //    }
-//
-//    fun submitApplication() {
-//
-//        viewModelScope.launch(coroutineExceptionHandler) {
-//            try {
-//                _submissionState.value = SubmissionState.Loading
-//
-//                delay(2000.milliseconds)
-//
-//                val values = _formState.value.values
-//
-//                val request = ApplicationRequest(
-//
-//                    fullName = values[AppConstants.FULL_NAME] ?: "",
-//
-//                    aadhaar = values[AppConstants.AADHAAR_NUMBER] ?: "",
-//
-//                    panCard = values[AppConstants.PAN_CARD],
-//
-//                    annualIncome = values[AppConstants.ANNUAL_INCOME]?.toDoubleOrNull() ?: 0.0,
-//
-//                    gender = values[AppConstants.GENDER] ?: ""
-//                )
-//
-//                //background task
-//                val applicationId = withContext(Dispatchers.IO) {
-//                    submitUseCase(request)
-//                }
-//
-//                _submissionState.value = SubmissionState.Success(applicationId)
-//
-//            } catch (e: Exception) {
-//
-//                if (e is IOException)
-//                    _submissionState.value = SubmissionState.Rejected(
-//                        e.message ?: "Rejected"
-//                    )
-//                else _submissionState.value =
-//                    SubmissionState.Error(e.message ?: "Submission Failed")
-//            }
-//        }
-//    }
+
 }

@@ -4,12 +4,14 @@ import android.content.Context
 import com.example.governmentservicepoc.data.repository.MetadataRepositoryImpl
 import com.example.governmentservicepoc.domain.agents.DynamicWorkflowEngine
 import com.example.governmentservicepoc.domain.agents.incomecertificate.EligibilityAgent
+import com.example.governmentservicepoc.domain.agents.incomecertificate.ServiceSelectionAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportDocumentCheckAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportPoliceVerificationAgent
 import com.example.governmentservicepoc.domain.repository.CitizenRepository
 import com.example.governmentservicepoc.domain.repository.MetadataRepository
 import com.example.governmentservicepoc.domain.usecase.CheckStatusUseCase
 import com.example.governmentservicepoc.domain.usecase.EligibilityUseCase
+import com.example.governmentservicepoc.domain.usecase.HomeServiceSelectionUseCase
 //import com.example.governmentservicepoc.domain.usecase.LoadMetadataUseCase
 import com.example.governmentservicepoc.domain.usecase.SubmitApplicationUseCase
 import com.example.governmentservicepoc.domain.usecase.passport.CheckPassportStatusUseCase
@@ -98,5 +100,13 @@ object AppModule {
         )
     }
 
+    @Provides
+    fun provideHomeServiceSelectionUseCase(
+        selectionAgent: ServiceSelectionAgent
+    ): HomeServiceSelectionUseCase {
+        return HomeServiceSelectionUseCase(
+            selectionAgent
+        )
+    }
 
 }

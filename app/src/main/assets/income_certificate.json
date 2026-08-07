@@ -1,6 +1,7 @@
 {
   "screenId": "income_certificate",
   "title": "Income Certificate Application",
+  "screenBackgroundUrl": "",
   "appFunctions": [
 
     "verifyIncomeEligibility",

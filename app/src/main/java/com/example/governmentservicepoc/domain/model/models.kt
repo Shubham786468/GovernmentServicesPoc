@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 data class ScreenMetadata(
     val screenId: String,
     val title: String,
+    var screenBackgroundUrl: String?,
 //    val appFunction: List<String>,
     val actions: List<ActionMetadata>,
     var workflow: List<String>,

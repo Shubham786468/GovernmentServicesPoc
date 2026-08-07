@@ -1,7 +1,7 @@
 {
   "screenId": "passport",
   "title": "Passport Application",
-
+  "screenBackgroundUrl": "",
   "appFunctions": [
     "verifyPassportDocuments",
     "submitPassportApplication",

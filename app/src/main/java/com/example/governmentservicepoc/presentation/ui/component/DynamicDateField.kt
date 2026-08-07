@@ -1,33 +1,37 @@
 package com.example.governmentservicepoc.presentation.ui.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.governmentservicepoc.domain.model.Field
-import com.google.adk.kt.agents.Instruction
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicDateField(
@@ -36,11 +40,29 @@ fun DynamicDateField(
     error: String? = null,
     onValueChange: (String) -> Unit
 ) {
-    var showDatePicker by remember {
-        mutableStateOf(false)
-    }
+
+    var showDatePicker by remember { mutableStateOf(false) }
 
     val datePickerState = rememberDatePickerState()
+
+    val activeColor = MaterialTheme.colorScheme.primary
+
+    val iconColor by animateColorAsState(
+        targetValue = if (showDatePicker) activeColor else Color.Gray,
+        label = "IconColorAnimation"
+    )
+
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+
+    val scale by animateFloatAsState(
+        targetValue = if (isFocused) {
+            showDatePicker = true
+            1.02f
+        } else 1f,
+        label = "scale"
+    )
+
 
     OutlinedTextField(
         value = value,
@@ -57,11 +79,35 @@ fun DynamicDateField(
             ) {
                 Icon(
                     imageVector = Icons.Default.DateRange,
-                    contentDescription = "Select Date"
+                    contentDescription = "Select Date",
+                    tint = iconColor
                 )
             }
         },
+
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = activeColor,
+            focusedLabelColor = activeColor,
+            cursorColor = activeColor,
+            focusedTrailingIconColor = activeColor,
+            unfocusedTrailingIconColor = Color.Gray
+        ),
+
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(
+                indication = null,
+                interactionSource = interactionSource
+            ) {
+                showDatePicker = true
+            }
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            },
+
         isError = !error.isNullOrBlank(),
+
         supportingText = {
             error?.let {
                 Text(
@@ -69,12 +115,14 @@ fun DynamicDateField(
                     color = MaterialTheme.colorScheme.error
                 )
             }
-        },
-        modifier = Modifier.fillMaxWidth()
+        }
     )
 
-    if (showDatePicker) {
-
+    AnimatedVisibility(
+        visible = showDatePicker,
+        enter = fadeIn() + scaleIn(initialScale = 0.9f),
+        exit = fadeOut() + scaleOut(targetScale = 0.9f)
+    ) {
         DatePickerDialog(
             onDismissRequest = {
                 showDatePicker = false
@@ -82,7 +130,6 @@ fun DynamicDateField(
             confirmButton = {
                 TextButton(
                     onClick = {
-
                         datePickerState.selectedDateMillis?.let { millis ->
 
                             val formattedDate =
@@ -111,8 +158,125 @@ fun DynamicDateField(
             }
         ) {
             DatePicker(
-                state = datePickerState
+                state = datePickerState,
+                colors = DatePickerDefaults.colors(
+                    selectedDayContainerColor = activeColor,
+                    todayDateBorderColor = activeColor,
+                    selectedYearContainerColor = activeColor
+                )
             )
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable()
+fun Preview(modifier: Modifier = Modifier) {
+    var date by remember {
+        mutableStateOf("15/08/2026")
+    }
+
+    DynamicDateField(
+        field = Field(
+            id = "dob",
+            label = "Date of Birth",
+            type = "date",
+            errorValidation = null
+        ),
+        value = date,
+        error = null,
+        onValueChange = {
+            date = it
+        }
+    )
+}
+
+//
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Composable
+//fun DynamicDateField(
+//    field: Field,
+//    value: String,
+//    error: String? = null,
+//    onValueChange: (String) -> Unit
+//) {
+//    var showDatePicker by remember {
+//        mutableStateOf(false)
+//    }
+//
+//    val datePickerState = rememberDatePickerState()
+//
+//    OutlinedTextField(
+//        value = value,
+//        onValueChange = {},
+//        readOnly = true,
+//        label = {
+//            Text(field.label)
+//        },
+//        trailingIcon = {
+//            IconButton(
+//                onClick = {
+//                    showDatePicker = true
+//                }
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Default.DateRange,
+//                    contentDescription = "Select Date"
+//                )
+//            }
+//        },
+//        isError = !error.isNullOrBlank(),
+//        supportingText = {
+//            error?.let {
+//                Text(
+//                    text = it,
+//                    color = MaterialTheme.colorScheme.error
+//                )
+//            }
+//        },
+//        modifier = Modifier.fillMaxWidth()
+//    )
+//
+//    if (showDatePicker) {
+//
+//        DatePickerDialog(
+//            onDismissRequest = {
+//                showDatePicker = false
+//            },
+//            confirmButton = {
+//                TextButton(
+//                    onClick = {
+//
+//                        datePickerState.selectedDateMillis?.let { millis ->
+//
+//                            val formattedDate =
+//                                SimpleDateFormat(
+//                                    "dd/MM/yyyy",
+//                                    Locale.getDefault()
+//                                ).format(Date(millis))
+//
+//                            onValueChange(formattedDate)
+//                        }
+//
+//                        showDatePicker = false
+//                    }
+//                ) {
+//                    Text("OK")
+//                }
+//            },
+//            dismissButton = {
+//                TextButton(
+//                    onClick = {
+//                        showDatePicker = false
+//                    }
+//                ) {
+//                    Text("Cancel")
+//                }
+//            }
+//        ) {
+//            DatePicker(
+//                state = datePickerState
+//            )
+//        }
+//    }
+//}

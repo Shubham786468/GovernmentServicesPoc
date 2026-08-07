@@ -18,17 +18,29 @@ class UiAndWorkflowOrchestrator(
         prompt: String
     ): ServiceDefinition {
 
-        val serviceId =
-            serviceSelectionAgent
-                .resolveService(
-                    prompt
-                )
+        /**
+         * as we are executing serivceSelection at start on Home Screen
+         * so not required here for now.
+         */
+        val serviceId = prompt
+
+//        val serviceId =
+//            serviceSelectionAgent
+//                .resolveService(
+//                    prompt
+//                )
 
         val metadata = uiMetadataAgent
             .generateScreen(
                 serviceId
             )
 
+//        val workflowSteps = listOf(
+//            "ELIGIBILITY",
+//            "VERIFICATION",
+//            "APPROVAL",
+//            "SUBMIT"
+//        )
         val workflowSteps =
             workflowPlannerAgent
                 .generateWorkflow(

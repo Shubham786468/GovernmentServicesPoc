@@ -137,4 +137,8 @@ dependencies {
     //EncryptedSharedPreferences
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
+    // Image Loading
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+
 }
