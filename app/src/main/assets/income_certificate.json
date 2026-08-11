@@ -1,7 +1,7 @@
 {
   "screenId": "income_certificate",
   "title": "Income Certificate Application",
-  "screenBackgroundUrl": "",
+  "screenBackgroundUrl": "android.resource://${LocalContext.current.packageName}/${R.drawable.income_certificate}",
   "appFunctions": [
 
     "verifyIncomeEligibility",

@@ -15,7 +15,8 @@ class GovernmentServiceTool {
             "income_certificate",
             "passport",
             "pension",
-            "driving_license"
+            "driving_license",
+            "none"
         )
     }
 }

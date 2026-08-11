@@ -172,7 +172,7 @@ fun HomeScreen(
             when (service.lowercase()) {
                 "income_certificate" -> {
                     scope.launch {
-                        delay(1000.milliseconds)
+                        delay(500.milliseconds)
                         messages.add(
                             ChatMessage(
                                 "Sure, I can help you apply for an Income Certificate.",
@@ -194,7 +194,7 @@ fun HomeScreen(
 
                 "passport" -> {
                     scope.launch {
-                        delay(1000.milliseconds)
+                        delay(500.milliseconds)
                         messages.add(
                             ChatMessage(
                                 "Sure, I can help you apply for a Passport. Let's begin.",
@@ -217,7 +217,7 @@ fun HomeScreen(
 
                 "pension" -> {
                     scope.launch {
-                        delay(1000.milliseconds)
+                        delay(500.milliseconds)
                         messages.add(
                             ChatMessage(
                                 "Sorry for the inconvenience, Not available for Now.",
@@ -229,7 +229,7 @@ fun HomeScreen(
 
                 "driving_license" -> {
                     scope.launch {
-                        delay(1000.milliseconds)
+                        delay(500.milliseconds)
                         messages.add(
                             ChatMessage(
                                 "Sorry for the inconvenience, Not available for Now.",
@@ -314,12 +314,21 @@ fun HomeScreen(
                             false
                         )
                     )
-                    messages.add(ChatMessage("", true, true))
-                    if (homeViewModel.isLoading.value) {
 
+                    if (input.isNotEmpty() &&
+                        (input.trim().lowercase() == "hi" || input.trim().lowercase() == "hello" || input.trim().lowercase() == "hey")
+                    ) {
+                        messages.add(
+                            ChatMessage(
+                                "Hi, How can I help you?",
+                                true
+                            )
+                        )
+                    } else {
+                        messages.add(ChatMessage("", true, true))
+                        homeViewModel.getServiceName(input)
                     }
 
-                    homeViewModel.getServiceName(input)
                     userInput = ""
 
 //                    when (serviceName.trim().lowercase()) {

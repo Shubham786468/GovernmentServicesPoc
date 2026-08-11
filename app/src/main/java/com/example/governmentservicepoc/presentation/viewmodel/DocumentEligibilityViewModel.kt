@@ -3,6 +3,7 @@ package com.example.governmentservicepoc.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.governmentservicepoc.domain.usecase.EligibilityUseCase
+import com.example.governmentservicepoc.domain.usecase.passport.VerifyDocumentsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -14,8 +15,8 @@ import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
-class EligibilityViewModel @Inject constructor(
-    private val eligibilityUseCase: EligibilityUseCase
+class DocumentEligibilityViewModel @Inject constructor(
+    private val eligibilityUseCase: VerifyDocumentsUseCase
 ) : ViewModel() {
 
     private val _snackbarMessage = MutableSharedFlow<String>()
@@ -30,7 +31,7 @@ class EligibilityViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error = _error.asStateFlow()
 
-    fun checkEligibility(income: Double) {
+    fun checkEligibility(aadhaarNumber: String) {
         viewModelScope.launch {
 
             _isLoading.value = true
@@ -40,7 +41,7 @@ class EligibilityViewModel @Inject constructor(
             delay(2000.milliseconds)
 
             runCatching {
-                eligibilityUseCase(income)
+                eligibilityUseCase(aadhaarNumber)
             }
                 .onSuccess {
                     _isEligible.value = it
@@ -55,6 +56,7 @@ class EligibilityViewModel @Inject constructor(
 
     fun updateSnackbarEvent(string: String) {
         viewModelScope.launch {
+            _error.value = string
             _snackbarMessage.emit(string)
         }
     }

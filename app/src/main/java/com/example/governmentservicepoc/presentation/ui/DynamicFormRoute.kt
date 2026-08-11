@@ -96,8 +96,7 @@ fun DynamicFormRoute(
 
             is SubmissionState.Success -> {
 
-                val applicationId =
-                    "Application ID: ${(submissionState as SubmissionState.Success).applicationId}"
+                val applicationId = (submissionState as SubmissionState.Success).applicationId
 
                 AppAlertDialog(
                     title = "Success",

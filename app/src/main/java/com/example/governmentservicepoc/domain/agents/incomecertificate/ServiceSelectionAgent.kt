@@ -6,6 +6,7 @@ import com.google.adk.kt.events.Event
 import com.google.adk.kt.types.Content
 import com.google.adk.kt.types.Part
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.toList
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,6 +39,17 @@ class ServiceSelectionAgent @Inject constructor(
                 )
             ),
         ).asSequence().toList()
+
+//        val events = runner.runAsync(
+//            userId = userId,
+//            sessionId = sessionId,
+//            newMessage = Content(
+//                role = "user",
+//                parts = listOf(
+//                    Part(text = prompt)
+//                )
+//            ),
+//        ).toList()
 
         Log.d("ADK_EVENTS", Gson().toJson(events))
 

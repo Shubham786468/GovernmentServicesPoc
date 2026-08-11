@@ -1,7 +1,8 @@
 package com.example.governmentservicepoc.presentation.ui.eligibility
 
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +18,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,23 +34,29 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.governmentservicepoc.domain.model.Validation
 import com.example.governmentservicepoc.presentation.ui.component.DynamicCircularProgressIndicator
-import com.example.governmentservicepoc.presentation.viewmodel.EligibilityViewModel
-import com.example.governmentservicepoc.utils.isValidIncome
+import com.example.governmentservicepoc.presentation.viewmodel.DocumentEligibilityViewModel
+import com.example.governmentservicepoc.utils.isValidAadhaar
 import kotlinx.coroutines.flow.collectLatest
 
-
 @Composable
-fun CheckEligibility(
+fun DocumentEligibility(
     modifier: Modifier = Modifier,
-    snackbarHostState: SnackbarHostState,
-    eligibilityViewModel: EligibilityViewModel = hiltViewModel()
+    eligibilityViewModel: DocumentEligibilityViewModel = hiltViewModel(),
+    snackbarHostState: SnackbarHostState
 ) {
 
-    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        eligibilityViewModel.snackbarMessage.collectLatest { message ->
+            snackbarHostState.showSnackbar(message)
+        }
+    }
+
 
     var userInput by remember {
         mutableStateOf("")
@@ -58,15 +64,24 @@ fun CheckEligibility(
 
     val listState = rememberLazyListState()
     val scroll = rememberScrollState()
+    val scope = rememberCoroutineScope()
+
+
+
     val isLoading by eligibilityViewModel.isLoading.collectAsState()
     val isEligible by eligibilityViewModel.isEligible.collectAsState()
+    val error by eligibilityViewModel.error.collectAsState()
 
 
-    LaunchedEffect(Unit) {
-        eligibilityViewModel.snackbarMessage.collectLatest { message ->
-            snackbarHostState.showSnackbar(message)
-        }
-    }
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+
+
+
+    val scale by animateFloatAsState(
+        targetValue = if (isFocused) 1.02f else 1f,
+        label = "scale"
+    )
 
     Column(
         modifier = modifier
@@ -91,9 +106,18 @@ fun CheckEligibility(
                 onValueChange = {
                     userInput = it
                 },
-                modifier = Modifier.weight(1f),
                 placeholder = {
-                    Text("Annual Income in a year. Ex: 50000")
+                    Text("Aadhaar Number...")
+                },
+                interactionSource = interactionSource,
+                isError = error != null,
+                supportingText = {
+                    error?.let {
+                        Text(
+                            text = it,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Send
@@ -102,21 +126,27 @@ fun CheckEligibility(
                     onSend = {
 
                     }
-                )
+                ),
+                modifier = Modifier
+                    .weight(1f)
+                    .graphicsLayer {
+                        scaleX = scale
+                        scaleY = scale
+                    }
             )
 
             Spacer(modifier = Modifier.width(8.dp))
 
             IconButton(
+                modifier = Modifier.padding(bottom = 17.dp),
                 onClick = {
-
                     val input = userInput.trim()
 
                     if (input.isBlank()) return@IconButton
-                    if (input.isValidIncome()) {
-                        eligibilityViewModel.checkEligibility(input.toDoubleOrNull() ?: 0.0)
+                    if (input.isValidAadhaar()) {
+                        eligibilityViewModel.checkEligibility(input)
                     } else {
-                        eligibilityViewModel.updateSnackbarEvent("Please enter a valid income")
+                        eligibilityViewModel.updateSnackbarEvent("Please enter a valid Aadhaar Number")
                     }
 
                     userInput = ""

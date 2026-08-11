@@ -1,14 +1,17 @@
 package com.example.governmentservicepoc.presentation.navigation
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.governmentservicepoc.presentation.ui.ComingSoonScreen
+import com.example.governmentservicepoc.presentation.ui.eligibility.BaseEligibility
 import com.example.governmentservicepoc.presentation.ui.eligibility.CheckEligibility
+import com.example.governmentservicepoc.presentation.ui.eligibility.DocumentEligibility
 
 fun NavGraphBuilder.eligibilityGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    snackbarHostState: SnackbarHostState
 ) {
 
     navigation(
@@ -17,12 +20,27 @@ fun NavGraphBuilder.eligibilityGraph(
     ) {
 
         composable("eligibility_screen") {
-//            ComingSoonScreen("Check Eligibility")
-            CheckEligibility()
+            BaseEligibility(
+                onEligibilityClick = {
+                    navController.navigate(
+                        "eligibility"
+                    )
+                },
+                onDocumentClick = {
+                    navController.navigate(
+                        "document"
+                    )
+                }
+            )
+
+
         }
 
-        composable("settings") {
-//            SettingsScreen()
+        composable("eligibility") {
+            CheckEligibility(snackbarHostState = snackbarHostState)
+        }
+        composable("document") {
+            DocumentEligibility(snackbarHostState = snackbarHostState)
         }
     }
 }

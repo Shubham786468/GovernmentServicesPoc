@@ -32,8 +32,11 @@ object ServiceSelectionAdkAgent {
                 passport
                 pension
                 driving_license
+                none
                 
                 
+                
+                If not found any match return none.
                 Do not return explanations.
                 Do not return JSON.
                 Do not return punctuation.

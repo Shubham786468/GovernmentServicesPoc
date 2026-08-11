@@ -29,7 +29,8 @@ fun AppNavGraph(
         )
 
         eligibilityGraph(
-            navController
+            navController,
+            snackbarHostState
         )
     }
 }
