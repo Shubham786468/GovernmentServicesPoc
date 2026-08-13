@@ -9,26 +9,26 @@ import com.google.adk.kt.models.Gemini
  * a government service.
  * It uses the Gemini model to process instructions and generate the required workflow steps.
  */
-object WorkflowPlannerAdkAgent {
-
-    val agent = LlmAgent(
-
-        name = "workflow_planner",
-
-        description = "Generates workflow steps",
-
-        model = Gemini(
-            name = AiConfig.AI_MODEL_NAME,
-            apiKey = AiConfig.AI_API_KEY
-        ),
-
-        instruction = Instruction(
-            """
-                Return workflow steps
-                for a government service.
-                """
-        ),
-
-        tools = WorkflowPlannerTool().generatedTools()
-    )
-}
+//object WorkflowPlannerAdkAgent {
+//
+//    val agent = LlmAgent(
+//
+//        name = "workflow_planner",
+//
+//        description = "Generates workflow steps",
+//
+//        model = Gemini(
+//            name = AiConfig.AI_MODEL_NAME,
+//            apiKey = AiConfig.AI_API_KEY
+//        ),
+//
+//        instruction = Instruction(
+//            """
+//                Return workflow steps
+//                for a government service.
+//                """
+//        ),
+//
+//        tools = WorkflowPlannerTool().generatedTools()
+//    )
+//}

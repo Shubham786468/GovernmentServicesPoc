@@ -22,18 +22,18 @@ class AdkRunnerManager @Inject constructor() {
         )
     }
 
-    private val adkWorkflowRunner by lazy {
-        InMemoryRunner(
-            appName = "GovernmentServicePOC",
-            agent = WorkflowPlannerAdkAgent.agent,
-            sessionService = sessionService
-        )
-    }
+//    private val adkWorkflowRunner by lazy {
+//        InMemoryRunner(
+//            appName = "GovernmentServicePOC",
+//            agent = WorkflowPlannerAdkAgent.agent,
+//            sessionService = sessionService
+//        )
+//    }
 
 
-    fun getWorkflowRunner(): InMemoryRunner {
-        return adkWorkflowRunner
-    }
+//    fun getWorkflowRunner(): InMemoryRunner {
+//        return adkWorkflowRunner
+//    }
     fun getServiceSelectionRunner(): InMemoryRunner {
         return adkServiceSelectionRunner
     }

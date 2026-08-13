@@ -30,9 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.governmentservicepoc.domain.model.ActionMetadata
-import com.example.governmentservicepoc.domain.model.Field
-import com.example.governmentservicepoc.domain.model.ScreenMetadata
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiAction
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiSchema
 import com.example.governmentservicepoc.presentation.ui.component.DynamicButton
 import com.example.governmentservicepoc.utils.AppConstants
 import com.example.governmentservicepoc.utils.getCertificateBackgroundImageUri
@@ -40,12 +40,12 @@ import com.example.governmentservicepoc.utils.getCertificateBackgroundImageUri
 @Composable
 fun DynamicFormScreen(
     modifier: Modifier,
-    metadata: ScreenMetadata,
+    metadata: A2UiSchema,
     values: Map<String, String>,
     errors: Map<String, String>,
 //    onValueChanged: (String, String) -> Unit,
-    onValueChanged: (Field, String) -> Unit,
-    onSubmit: (ActionMetadata) -> Unit
+    onValueChanged: (A2UiComponent, String) -> Unit,
+    onSubmit: (A2UiAction) -> Unit
 ) {
 
     val scrollState = rememberScrollState()
@@ -88,7 +88,7 @@ fun DynamicFormScreen(
             )
 
             FormRenderer(
-                fields = metadata.fields,
+                fields = metadata.components,
                 values = values,
                 errors = errors,
                 onValueChanged = onValueChanged
@@ -110,10 +110,10 @@ fun DynamicFormScreen(
 }
 
 @Composable
-fun ShowBackgroundIcon(metadata: ScreenMetadata, modifier: Modifier = Modifier) {
+fun ShowBackgroundIcon(metadata: A2UiSchema, modifier: Modifier = Modifier) {
 
     val ctx = LocalContext.current
-    metadata.screenBackgroundUrl = metadata.screenId.getCertificateBackgroundImageUri(ctx)
+    metadata.screenBackgroundUrl = metadata.title.getCertificateBackgroundImageUri(ctx)
 
     metadata.screenBackgroundUrl?.let { url ->
         Card(

@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +35,7 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicDateField(
-    field: Field,
+    field: A2UiComponent,
     value: String,
     error: String? = null,
     onValueChange: (String) -> Unit
@@ -177,11 +177,12 @@ fun Preview(modifier: Modifier = Modifier) {
     }
 
     DynamicDateField(
-        field = Field(
+        field = A2UiComponent(
             id = "dob",
             label = "Date of Birth",
             type = "date",
-            errorValidation = null
+            errorValidation = null,
+            required = true,
         ),
         value = date,
         error = null,

@@ -66,7 +66,7 @@ fun DynamicFormRoute(
 
             is DynamicUiState.Success -> {
 
-                val metadata = (state as DynamicUiState.Success).metadata
+                val metadata = (state as DynamicUiState.Success).a2uiSchema
 
                 val formState by viewModel.formState.collectAsState()
 

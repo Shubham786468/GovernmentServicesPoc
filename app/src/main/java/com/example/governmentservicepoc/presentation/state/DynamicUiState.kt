@@ -1,6 +1,6 @@
 package com.example.governmentservicepoc.presentation.state
 
-import com.example.governmentservicepoc.domain.model.ScreenMetadata
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiSchema
 
 sealed interface DynamicUiState {
 
@@ -8,7 +8,7 @@ sealed interface DynamicUiState {
         DynamicUiState
 
     data class Success(
-        val metadata: ScreenMetadata
+        val a2uiSchema: A2UiSchema
     ) : DynamicUiState
 
     data class Error(

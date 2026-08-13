@@ -169,7 +169,7 @@ fun HomeScreen(
     LaunchedEffect(Unit) {
         homeViewModel.serviceName.collect { service ->
             messages.remove(ChatMessage("", true, true))
-            when (service.lowercase()) {
+            when (service.screenId.lowercase()) {
                 "income_certificate" -> {
                     scope.launch {
                         delay(500.milliseconds)
@@ -188,11 +188,11 @@ fun HomeScreen(
                         )
 
                         delay(2.seconds)
-                        onIncomeClick(service)
+                        onIncomeClick(service.screenId)
                     }
                 }
 
-                "passport" -> {
+                "passport","passport_application" -> {
                     scope.launch {
                         delay(500.milliseconds)
                         messages.add(
@@ -211,7 +211,7 @@ fun HomeScreen(
 
 
                         delay(3000.milliseconds)
-                        onPassportClick(service)
+                        onPassportClick(service.screenId)
                     }
                 }
 
@@ -316,7 +316,8 @@ fun HomeScreen(
                     )
 
                     if (input.isNotEmpty() &&
-                        (input.trim().lowercase() == "hi" || input.trim().lowercase() == "hello" || input.trim().lowercase() == "hey")
+                        (input.trim().lowercase() == "hi" || input.trim()
+                            .lowercase() == "hello" || input.trim().lowercase() == "hey")
                     ) {
                         messages.add(
                             ChatMessage(

@@ -3,12 +3,11 @@ package com.example.governmentservicepoc.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.governmentservicepoc.appfunctions.AppFunctionRegistry
-import com.example.governmentservicepoc.data.repository.MetadataRepositoryImpl
-import com.example.governmentservicepoc.domain.agents.ui.UiAndWorkflowOrchestrator
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.domain.agents.ui.UiAgentOrchestrator
 import com.example.governmentservicepoc.domain.model.FormState
 import com.example.governmentservicepoc.presentation.state.DynamicUiState
 import com.example.governmentservicepoc.presentation.state.SubmissionState
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 import com.example.governmentservicepoc.utils.HandleException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -28,7 +27,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DynamicFormViewModel @Inject constructor(
-    private val uiAndWorkflowOrchestrator: UiAndWorkflowOrchestrator,
+    private val uiflowOrchestrator: UiAgentOrchestrator,
     private val appFunctionRegistry: AppFunctionRegistry
 ) : ViewModel() {
 
@@ -58,14 +57,12 @@ class DynamicFormViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                val serviceDefinition = withContext(Dispatchers.IO) {
-                    uiAndWorkflowOrchestrator.generateService(
+                val a2uiSchemaDefinition = withContext(Dispatchers.IO) {
+                    uiflowOrchestrator.generateUi(
                         prompt
                     )
                 }
-                serviceDefinition.metadata.workflow = serviceDefinition.workflowSteps
-
-                _state.value = DynamicUiState.Success(serviceDefinition.metadata)
+                _state.value = DynamicUiState.Success(a2uiSchemaDefinition)
             } catch (e: Exception) {
                 HandleException.handleError(exception = e) {
                     _state.value = DynamicUiState.Error(it)
@@ -74,7 +71,7 @@ class DynamicFormViewModel @Inject constructor(
         }
     }
 
-    fun updateField(field: Field, value: String) {
+    fun updateField(field: A2UiComponent, value: String) {
 
         val error = validateField(field, value)
 
@@ -139,7 +136,7 @@ class DynamicFormViewModel @Inject constructor(
 
 
     private fun validateField(
-        field: Field,
+        field: A2UiComponent,
         value: String
     ): String? {
 
@@ -177,7 +174,7 @@ class DynamicFormViewModel @Inject constructor(
 
     private fun validateForm(): String? {
 
-        val fields = (_state.value as DynamicUiState.Success).metadata.fields
+        val fields = (_state.value as DynamicUiState.Success).a2uiSchema.components
         val formValues = _formState.value.values
 
         fields.forEach { field ->

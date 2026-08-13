@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.governmentservicepoc.domain.usecase.HomeServiceSelectionUseCase
 import com.example.governmentservicepoc.presentation.state.SubmissionState
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiSchema
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +23,8 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val homeServiceSelectionUseCase: HomeServiceSelectionUseCase
 ) : ViewModel() {
-    private val _serviceName = MutableSharedFlow<String>()
-    val serviceName: SharedFlow<String> = _serviceName.asSharedFlow()
+    private val _serviceName = MutableSharedFlow<A2UiSchema>()
+    val serviceName: SharedFlow<A2UiSchema> = _serviceName.asSharedFlow()
 
     private val _error = MutableStateFlow("")
     val error: StateFlow<String> = _error.asStateFlow()

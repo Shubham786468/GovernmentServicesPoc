@@ -8,7 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 import com.example.governmentservicepoc.presentation.ui.component.DynamicDateField
 import com.example.governmentservicepoc.presentation.ui.component.DynamicDropdown
 import com.example.governmentservicepoc.presentation.ui.component.DynamicNumberField
@@ -17,11 +17,11 @@ import com.example.governmentservicepoc.presentation.ui.component.DynamicTextFie
 
 @Composable
 fun FormRenderer(
-    fields: List<Field>,
+    fields: List<A2UiComponent>,
     values: Map<String, String>,
     errors: Map<String, String>,
     onValueChanged: (
-        Field,
+        A2UiComponent,
         String
     ) -> Unit
 ) {

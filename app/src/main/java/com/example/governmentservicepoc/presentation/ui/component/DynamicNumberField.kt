@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.KeyboardType
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 
 //@Composable
 //fun DynamicNumberField(
@@ -38,7 +38,7 @@ import com.example.governmentservicepoc.domain.model.Field
 
 @Composable
 fun DynamicNumberField(
-    field: Field,
+    field: A2UiComponent,
     value: String,
     error: String? = null,
     onValueChange: (String) -> Unit

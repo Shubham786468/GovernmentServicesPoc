@@ -12,12 +12,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 
 
 @Composable
 fun DynamicTextField(
-    field: Field,
+    field: A2UiComponent,
     value: String,
     error: String? = null,
     onValueChange: (String) -> Unit

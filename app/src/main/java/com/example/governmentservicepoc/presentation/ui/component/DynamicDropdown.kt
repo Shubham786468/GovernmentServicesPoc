@@ -23,12 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import com.example.governmentservicepoc.domain.model.Field
+import com.example.governmentservicepoc.presentation.ui.a2ui.model.A2UiComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicDropdown(
-    field: Field,
+    field: A2UiComponent,
     value: String,
     error: String? = null,
     onSelected: (String) -> Unit

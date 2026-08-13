@@ -1,23 +1,21 @@
 package com.example.governmentservicepoc.di
 
 import com.example.governmentservicepoc.adk.AdkRunnerManager
-import com.example.governmentservicepoc.domain.agents.WorkflowPlannerAgent
+import com.example.governmentservicepoc.data.repository.A2UiAgent
 import com.example.governmentservicepoc.domain.agents.AgentRegistry
 import com.example.governmentservicepoc.domain.agents.incomecertificate.ApprovalAgent
 import com.example.governmentservicepoc.domain.agents.DynamicWorkflowEngine
 import com.example.governmentservicepoc.domain.agents.incomecertificate.EligibilityAgent
 import com.example.governmentservicepoc.domain.agents.incomecertificate.ServiceSelectionAgent
 import com.example.governmentservicepoc.domain.agents.incomecertificate.SubmitApplicationAgent
-import com.example.governmentservicepoc.domain.agents.ui.UiAndWorkflowOrchestrator
-import com.example.governmentservicepoc.domain.agents.ui.UiMetadataAgent
 import com.example.governmentservicepoc.domain.agents.incomecertificate.VerificationAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportApprovalAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportDocumentCheckAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportPoliceVerificationAgent
 import com.example.governmentservicepoc.domain.agents.passport.SubmitPassportApplicationAgent
+import com.example.governmentservicepoc.domain.agents.ui.UiAgentOrchestrator
 
 import com.example.governmentservicepoc.domain.repository.CitizenRepository
-import com.example.governmentservicepoc.domain.repository.MetadataRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -90,6 +88,7 @@ object AgentModule {
     fun provideAdkRunnerManager(): AdkRunnerManager {
         return AdkRunnerManager()
     }
+
     @Provides
     @Singleton
     fun provideServiceSelectionAgent(
@@ -102,27 +101,20 @@ object AgentModule {
     }
 
     @Provides
-    fun provideUiMetadataAgent(
-        repository: MetadataRepository
-    ) =
-        UiMetadataAgent(repository)
+    @Singleton
+    fun provideUiAGentOrchestrator(
+        a2UiAgent: A2UiAgent
+    ): UiAgentOrchestrator {
+        return UiAgentOrchestrator(a2UiAgent)
+    }
 
     @Provides
     @Singleton
-    fun provideWorkflowPlannerAgent(
+    fun provideA2UiAgent(
         runnerManager: AdkRunnerManager
-    ) = WorkflowPlannerAgent(runnerManager)
+    ): A2UiAgent {
+        return A2UiAgent(runnerManager)
+    }
 
 
-    @Provides
-    fun provideUiAgentOrchestrator(
-        serviceSelectionAgent: ServiceSelectionAgent,
-        uiMetadataAgent: UiMetadataAgent,
-        workflowPlannerAgent: WorkflowPlannerAgent
-    ) =
-        UiAndWorkflowOrchestrator(
-            serviceSelectionAgent,
-            uiMetadataAgent,
-            workflowPlannerAgent
-        )
 }
