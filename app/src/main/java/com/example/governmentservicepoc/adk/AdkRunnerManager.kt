@@ -14,10 +14,18 @@ import javax.inject.Singleton
 class AdkRunnerManager @Inject constructor() {
 
     private val sessionService = InMemorySessionService()
-    private val adkServiceSelectionRunner by lazy {
+    private val adkServiceRunner by lazy {
         InMemoryRunner(
             appName = "GovernmentServicePOC",
             agent = ServiceSelectionAdkAgent.agent,
+            sessionService = sessionService
+        )
+    }
+
+    private val adkServiceSelectionRunner by lazy {
+        InMemoryRunner(
+            appName = "GovernmentServicePOC",
+            agent = ServiceSelectionAdkAgent.getNameAgent,
             sessionService = sessionService
         )
     }
@@ -36,5 +44,8 @@ class AdkRunnerManager @Inject constructor() {
 //    }
     fun getServiceSelectionRunner(): InMemoryRunner {
         return adkServiceSelectionRunner
+    }
+    fun getServiceRunner(): InMemoryRunner {
+        return adkServiceRunner
     }
 }

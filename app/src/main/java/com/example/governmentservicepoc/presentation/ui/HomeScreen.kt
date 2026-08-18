@@ -169,7 +169,7 @@ fun HomeScreen(
     LaunchedEffect(Unit) {
         homeViewModel.serviceName.collect { service ->
             messages.remove(ChatMessage("", true, true))
-            when (service.screenId.lowercase()) {
+            when (service.lowercase()) {
                 "income_certificate" -> {
                     scope.launch {
                         delay(500.milliseconds)
@@ -188,11 +188,11 @@ fun HomeScreen(
                         )
 
                         delay(2.seconds)
-                        onIncomeClick(service.screenId)
+                        onIncomeClick(service)
                     }
                 }
 
-                "passport","passport_application" -> {
+                "passport", "passport_application" -> {
                     scope.launch {
                         delay(500.milliseconds)
                         messages.add(
@@ -208,34 +208,39 @@ fun HomeScreen(
                                 true
                             )
                         )
-
-
                         delay(3000.milliseconds)
-                        onPassportClick(service.screenId)
+                        if (service.equals("passport", true)) {
+                            onPassportClick("passport_application")
+                        } else {
+                            onPassportClick(service)
+                        }
                     }
                 }
 
                 "pension" -> {
                     scope.launch {
                         delay(500.milliseconds)
-                        messages.add(
-                            ChatMessage(
-                                "Sorry for the inconvenience, Not available for Now.",
-                                true
-                            )
-                        )
+
+                        onPensionClick(service)
+//                        messages.add(
+//                            ChatMessage(
+//                                "Sorry for the inconvenience, Not available for Now.",
+//                                true
+//                            )
+//                        )
                     }
                 }
 
                 "driving_license" -> {
                     scope.launch {
                         delay(500.milliseconds)
-                        messages.add(
-                            ChatMessage(
-                                "Sorry for the inconvenience, Not available for Now.",
-                                true
-                            )
-                        )
+                        onDrivingLicenseClick(service)
+//                        messages.add(
+//                            ChatMessage(
+//                                "Sorry for the inconvenience, Not available for Now.",
+//                                true
+//                            )
+//                        )
                     }
                 }
 

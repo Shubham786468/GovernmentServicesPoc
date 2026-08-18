@@ -1,7 +1,6 @@
 package com.example.governmentservicepoc
 
 import android.os.Bundle
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +17,7 @@ class MainActivity : ComponentActivity() {
             GovernmentServicePOCTheme {
                 GovernmentServiceApp()
 //                val snackbarHostState = remember { SnackbarHostState() }
-//
+////
 //                Scaffold(
 //                    modifier = Modifier.fillMaxSize(),
 //                    contentWindowInsets = WindowInsets.systemBars,
@@ -27,6 +26,9 @@ class MainActivity : ComponentActivity() {
 //
 //                    }
 //                ) { innerPadding ->
+
+//                    DynamicFormScreen(Modifier.padding(innerPadding))
+
 //
 //                    AppNavGraph(Modifier.padding(innerPadding),
 //                        snackbarHostState=snackbarHostState)

@@ -122,7 +122,7 @@ dependencies {
     ksp("androidx.appfunctions:appfunctions-compiler:1.0.0-alpha08")
 
     // Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+    implementation(libs.kotlinx.serialization.json)
 
     //Google ADK
     implementation("com.google.adk:google-adk-kotlin-core-android:0.5.0")

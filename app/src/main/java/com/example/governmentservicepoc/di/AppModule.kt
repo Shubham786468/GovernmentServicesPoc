@@ -2,7 +2,6 @@ package com.example.governmentservicepoc.di
 
 import com.example.governmentservicepoc.domain.agents.DynamicWorkflowEngine
 import com.example.governmentservicepoc.domain.agents.incomecertificate.EligibilityAgent
-import com.example.governmentservicepoc.domain.agents.incomecertificate.ServiceSelectionAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportDocumentCheckAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportPoliceVerificationAgent
 import com.example.governmentservicepoc.domain.agents.ui.UiAgentOrchestrator

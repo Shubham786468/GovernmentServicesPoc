@@ -1,6 +1,6 @@
 package com.example.governmentservicepoc.domain.agents.ui
 //
-//import com.example.governmentservicepoc.domain.agents.incomecertificate.ServiceSelectionAgent
+//import com.example.governmentservicepoc.domain.agents.ServiceSelectionAgent
 //import com.example.governmentservicepoc.domain.agents.WorkflowPlannerAgent
 //import com.example.governmentservicepoc.domain.model.ServiceDefinition
 //

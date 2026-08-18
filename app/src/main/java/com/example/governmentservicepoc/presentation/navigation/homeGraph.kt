@@ -7,9 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.governmentservicepoc.presentation.ui.a2ui.DynamicFormScreen
 import com.example.governmentservicepoc.presentation.routes.NavRoutes
-import com.example.governmentservicepoc.presentation.ui.ComingSoonScreen
-import com.example.governmentservicepoc.presentation.ui.DynamicFormRoute
 import com.example.governmentservicepoc.presentation.ui.HomeScreen
 
 fun NavGraphBuilder.homeGraph(
@@ -59,10 +58,11 @@ fun NavGraphBuilder.homeGraph(
             )
         ) { backStackEntry ->
             val input = backStackEntry.arguments?.getString("id")
-            DynamicFormRoute(
+            DynamicFormScreen(
                 userInput = input ?: "",
                 snackbarHostState = snackbarHostState
             )
+
         }
 
         composable(
@@ -73,15 +73,13 @@ fun NavGraphBuilder.homeGraph(
                 }
             )
         ) { backStackEntry ->
-
             val input = backStackEntry.arguments?.getString("id")
-            DynamicFormRoute(
+
+            DynamicFormScreen(
                 userInput = input ?: "",
                 snackbarHostState = snackbarHostState
             )
-//            ComingSoonScreen(
-//                title = "Passport"
-//            )
+
         }
 
         composable(
@@ -94,9 +92,12 @@ fun NavGraphBuilder.homeGraph(
         ) { backStackEntry ->
 
             val input = backStackEntry.arguments?.getString("id")
-            ComingSoonScreen(
-                title = "Driving License"
+
+            DynamicFormScreen(
+                userInput = input ?: "",
+                snackbarHostState = snackbarHostState
             )
+
         }
 
         composable(
@@ -109,9 +110,12 @@ fun NavGraphBuilder.homeGraph(
         ) { backStackEntry ->
 
             val input = backStackEntry.arguments?.getString("id")
-            ComingSoonScreen(
-                title = "Pension"
+
+            DynamicFormScreen(
+                userInput = input ?: "",
+                snackbarHostState = snackbarHostState
             )
+
         }
     }
 }

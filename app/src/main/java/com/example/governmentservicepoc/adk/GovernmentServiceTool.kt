@@ -28,8 +28,7 @@ class GovernmentServiceTool {
                     APPROVAL
                     SUBMIT
 
-                Action:
-                submitIncomeCertificate
+                Action: submitIncomeCertificate
                 """.trimIndent()
 
             "passport_certificate", "passport", "passport_application" ->
@@ -51,8 +50,7 @@ class GovernmentServiceTool {
                     PASSPORT_APPROVAL
                     SUBMIT
 
-                Action:
-                submitPassportApplication
+                Action: submitPassportApplication
                 
                 """.trimIndent()
 

@@ -5,10 +5,10 @@ object AppConstants {
 
 
     const val APPLICATION_ID = "applicationId"
-    const val MAX_ANNUAL_INCOME = 60000
+    const val MAX_ANNUAL_INCOME = 90000
     const val FULL_NAME = "fullName"
     const val DATE_OF_BIRTH = "dateOfBirth"
-    const val AADHAAR_NUMBER = "aadhaar"
+    const val AADHAAR_NUMBER = "aadhaarNumber"
     const val PASSPORT_NUMBER = "passportNumber"
 
     const val PAN_CARD = "pancard"

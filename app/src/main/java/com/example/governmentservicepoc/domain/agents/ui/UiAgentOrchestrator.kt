@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class UiAgentOrchestrator
 @Inject constructor(
     private val a2UiAgent: A2UiAgent
-){
+) {
 
     suspend fun generateUi(
         service: String
@@ -18,4 +18,14 @@ class UiAgentOrchestrator
         return a2UiAgent
             .generateUi(service)
     }
+
+    suspend fun generateServiceName(
+        service: String
+    ): String {
+
+        return a2UiAgent
+            .generateServiceName(service)
+    }
+
+
 }

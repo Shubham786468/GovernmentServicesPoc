@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GovernmentServicePOC"
 include(":app")
- 
+include(":android_compose")

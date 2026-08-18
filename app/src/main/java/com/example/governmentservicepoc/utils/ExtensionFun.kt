@@ -7,6 +7,10 @@ fun String.isValidName(): Boolean {
     return matches(Regex("^[A-Za-z ]+$"))
 }
 
+fun String.addFormStart(): String{
+    return "form.$this"
+}
+
 fun String.isValidAadhaar(): Boolean {
     return matches(Regex("^\\d{12}$"))
 }

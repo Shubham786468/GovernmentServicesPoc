@@ -6,7 +6,7 @@ import com.example.governmentservicepoc.domain.agents.AgentRegistry
 import com.example.governmentservicepoc.domain.agents.incomecertificate.ApprovalAgent
 import com.example.governmentservicepoc.domain.agents.DynamicWorkflowEngine
 import com.example.governmentservicepoc.domain.agents.incomecertificate.EligibilityAgent
-import com.example.governmentservicepoc.domain.agents.incomecertificate.ServiceSelectionAgent
+import com.example.governmentservicepoc.domain.agents.ServiceSelectionAgent
 import com.example.governmentservicepoc.domain.agents.incomecertificate.SubmitApplicationAgent
 import com.example.governmentservicepoc.domain.agents.incomecertificate.VerificationAgent
 import com.example.governmentservicepoc.domain.agents.passport.PassportApprovalAgent

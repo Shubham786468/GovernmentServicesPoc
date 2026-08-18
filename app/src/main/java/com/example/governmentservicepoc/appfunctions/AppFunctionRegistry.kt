@@ -10,6 +10,7 @@ import com.example.governmentservicepoc.domain.usecase.passport.SchedulePoliceVe
 import com.example.governmentservicepoc.domain.usecase.passport.SubmitPassportUseCase
 import com.example.governmentservicepoc.domain.usecase.passport.VerifyDocumentsUseCase
 import com.example.governmentservicepoc.utils.AppConstants
+import com.example.governmentservicepoc.utils.addFormStart
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -70,13 +71,13 @@ class AppFunctionRegistry @Inject constructor(
             "submitIncomeCertificate" -> {
                 submitUseCase(
                     ApplicationRequest(
-                        fullName = payload[AppConstants.FULL_NAME].toString(),
+                        fullName = payload[AppConstants.FULL_NAME.addFormStart()].toString(),
 
-                        aadhaar = payload[AppConstants.AADHAAR_NUMBER].toString(),
+                        aadhaar = payload[AppConstants.AADHAAR_NUMBER.addFormStart()].toString(),
 
-                        annualIncome = payload[AppConstants.ANNUAL_INCOME].toString().toDouble(),
+                        annualIncome = payload[AppConstants.ANNUAL_INCOME.addFormStart()].toString().toDouble(),
 
-                        gender = payload[AppConstants.GENDER].toString()
+                        gender = payload[AppConstants.GENDER.addFormStart()].toString()
                     )
                 )
             }
@@ -95,14 +96,14 @@ class AppFunctionRegistry @Inject constructor(
             "submitPassportApplication" -> {
                 submitPassportUseCase(
                     PassportApplicationRequest(
-                        fullName = payload[AppConstants.FULL_NAME].toString(),
-                        dateOfBirth = payload[AppConstants.DATE_OF_BIRTH].toString(),
-                        gender = payload[AppConstants.GENDER].toString(),
-                        address = payload[AppConstants.ADDRESS].toString(),
-                        nationality = payload[AppConstants.NATIONALITY].toString(),
-                        aadhaar = payload[AppConstants.AADHAAR_NUMBER].toString(),
-                        mobileNumber = payload[AppConstants.MOBILE_NUMBER].toString(),
-                        email = payload[AppConstants.EMAIL].toString()
+                        fullName = payload[AppConstants.FULL_NAME.addFormStart()].toString(),
+                        dateOfBirth = payload[AppConstants.DATE_OF_BIRTH.addFormStart()].toString(),
+                        gender = payload[AppConstants.GENDER.addFormStart()].toString(),
+                        address = payload[AppConstants.ADDRESS.addFormStart()].toString(),
+                        nationality = payload[AppConstants.NATIONALITY.addFormStart()].toString(),
+                        aadhaar = payload[AppConstants.AADHAAR_NUMBER.addFormStart()].toString(),
+                        mobileNumber = payload[AppConstants.MOBILE_NUMBER.addFormStart()].toString(),
+                        email = payload[AppConstants.EMAIL.addFormStart()].toString()
                     )
                 )
             }

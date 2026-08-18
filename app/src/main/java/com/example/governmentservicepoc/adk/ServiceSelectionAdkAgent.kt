@@ -41,6 +41,7 @@ object ServiceSelectionAdkAgent {
                 
                 {
                   "screenId": "",
+                  "layout": {},
                   "title": "",
                   "screenBackgroundUrl": "",
                   "appFunctions": [],
@@ -66,6 +67,44 @@ object ServiceSelectionAdkAgent {
                 Driving Licence → driving_licence
                 Caste Certificate → caste_certificate
                 Marriage Certificate → marriage_certificate
+                
+                
+                LAYOUT RULES
+
+                layout must always be an object.
+                
+                layout represents the UI hierarchy and must be rendered recursively.
+                
+                Supported layout types:
+                
+                - screen
+                - column
+                - row
+                - card
+                - section
+                
+                Each layout node must follow:
+                
+                {
+                  "id": "",
+                  "type": "",
+                  "title": "",
+                  "children": [],
+                  "componentIds": [],
+                  "actionIds": []
+                }
+                
+                Rules:
+                
+                1. Root layout must always be type="screen"
+                2. screen must contain at least one child
+                3. column may contain cards, rows, sections
+                4. row may contain actions or components
+                5. card should group related fields
+                6. componentIds must reference existing component ids
+                7. actionIds must reference existing action ids
+                8. id must be unique
+
                 
                 
                 BACKGROUND URL RULE
@@ -134,10 +173,23 @@ object ServiceSelectionAdkAgent {
                 
                 COMPONENTS RULES
                 
-                1. All user inputs must be generated under "components".
+             
+                1.The layout must reference fields through componentIds.
+                Component definitions are separate from layout definitions.
+                Layout controls:
+                - placement
+                - grouping
+                - nesting
+                Components control:
+                - field metadata
+                - validation
+                - options
+                - bindings
+                   
                 2. Each field represents an A2UiComponent.
-                3. Each field must contain:
-                
+                3. Each field must contain:All form fields must be defined under "components".
+
+                                
                 {
                   "id": "",
                   "label": "",
@@ -190,6 +242,15 @@ object ServiceSelectionAdkAgent {
                   "regex": "^[A-Za-z ]+$",
                   "errorMessage": "Name should contain only letters"
                 }
+                
+                Date:
+                
+                {
+                  "required": true,
+                  "regex": "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/([0-9]{4})$",
+                  "errorMessage": "Enter a valid date DD/MM/YYYY format."
+                }
+                
                 
                 Aadhaar:
                 
@@ -257,6 +318,38 @@ object ServiceSelectionAdkAgent {
                   ]
                 }
                 
+                BUTTON RULES
+                
+                {
+                  "id": "",
+                  "label": "",
+                  "type": "button",
+                  "required": true,
+                  "priorityType: "",
+	              "appFunction": ""
+                }
+                
+                Example :
+                
+                 {
+                  "id": "submit",
+                  "label": "Gender",
+                  "type": "button",
+                  "required": true,
+                  "priorityType: "primary",
+	              "appFunction": "submitIncomeCertificate"
+                }
+                but if is not submit button then update the priorityType to secondary
+                               
+                {
+                  "id": "submit",
+                  "label": "Gender",
+                  "type": "button",
+                  "required": true,
+                  "priorityType: "secondary",
+	              "appFunction": "submitIncomeCertificate"
+                }
+                
                 SERVICE-AWARE GENERATION
                 
                 Based on the requested government service:
@@ -272,9 +365,39 @@ object ServiceSelectionAdkAgent {
                 
                 Return ONLY the JSON object matching the schema above.
                 Do not return any explanation, reasoning, markdown, comments, or surrounding text.
-                """
+                """.trimIndent()
         ),
 
         tools = GovernmentServiceTool().generatedTools()
+    )
+
+
+    val getNameAgent = LlmAgent(
+        name = "government_service_selector",
+        description = "Selects the most appropriate government service",
+        model = Gemini(
+            name = AiConfig.AI_MODEL_NAME, apiKey = AiConfig.AI_API_KEY
+        ),
+        instruction = Instruction(
+            """
+                Identify the requested government service.
+                
+                Return ONLY one value:
+                
+                income_certificate
+                passport
+                pension
+                driving_license
+                none
+                
+                If not found any match return none.
+                Do not return explanations.
+                Do not return JSON.
+                Do not return punctuation.
+                Do not return markdown.
+                Do not return additional text.
+            """.trimIndent()
+        ),
+        tools = GetServiceName().generatedTools()
     )
 }

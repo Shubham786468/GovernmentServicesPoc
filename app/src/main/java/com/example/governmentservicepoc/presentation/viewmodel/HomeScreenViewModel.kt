@@ -23,8 +23,8 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val homeServiceSelectionUseCase: HomeServiceSelectionUseCase
 ) : ViewModel() {
-    private val _serviceName = MutableSharedFlow<A2UiSchema>()
-    val serviceName: SharedFlow<A2UiSchema> = _serviceName.asSharedFlow()
+    private val _serviceName = MutableSharedFlow<String>()
+    val serviceName: SharedFlow<String> = _serviceName.asSharedFlow()
 
     private val _error = MutableStateFlow("")
     val error: StateFlow<String> = _error.asStateFlow()
@@ -40,7 +40,6 @@ class HomeScreenViewModel @Inject constructor(
     fun stopLoading() {
         _isLoading.value = false
     }
-
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
         viewModelScope.launch {

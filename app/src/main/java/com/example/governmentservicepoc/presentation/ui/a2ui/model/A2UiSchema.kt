@@ -11,12 +11,14 @@ data class A2UiSchema(
 
     var screenBackgroundUrl: String?,
 
-    val components: List<A2UiComponent>,
+    val components: List<A2UiComponent>?,
 
-    val appFunction: List<String>,
+    val appFunction: List<String>?,
 
-    val actions: List<A2UiAction>,
+    val actions: List<A2UiAction>?,
 
-    val workflow: List<String>
+    val workflow: List<String>?,
+
+    val layout: LayoutNode
 )
 

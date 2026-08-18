@@ -14,14 +14,14 @@ data class A2UiComponent(
 
     val required: Boolean,
 
-    val options: List<String> = emptyList(),
+    val options: List<String>? = emptyList(),
 
-    @SerializedName("validation") val errorValidation: Validation? = null
+    @SerializedName("validation") val errorValidation: ValidationSchema? = null
 )
 
 
 @Serializable
-data class Validation(
+data class ValidationSchema(
     val required: Boolean,
     val regex: String?,
     val errorMessage: String?
