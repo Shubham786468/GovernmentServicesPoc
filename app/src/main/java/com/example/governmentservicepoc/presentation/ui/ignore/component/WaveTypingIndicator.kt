@@ -1,4 +1,4 @@
-package com.example.governmentservicepoc.presentation.ui.component
+package com.example.governmentservicepoc.presentation.ui.ignore.component
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

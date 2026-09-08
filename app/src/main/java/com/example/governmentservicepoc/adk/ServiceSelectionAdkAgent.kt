@@ -333,21 +333,22 @@ object ServiceSelectionAdkAgent {
                 
                  {
                   "id": "submit",
-                  "label": "Gender",
+                  "label": "Submit Application",
                   "type": "button",
                   "required": true,
                   "priorityType: "primary",
 	              "appFunction": "submitIncomeCertificate"
                 }
+                
                 but if is not submit button then update the priorityType to secondary
-                               
+                
                 {
-                  "id": "submit",
-                  "label": "Gender",
+                  "id": "checkStatus",
+                  "label": "Check Status",
                   "type": "button",
                   "required": true,
                   "priorityType: "secondary",
-	              "appFunction": "submitIncomeCertificate"
+	              "appFunction": ""
                 }
                 
                 SERVICE-AWARE GENERATION
@@ -361,7 +362,8 @@ object ServiceSelectionAdkAgent {
                 5. Generate suitable validations and regex rules.
                 6. Generate a valid screenId and screenBackgroundUrl.
                 
-                FINAL RULE
+                FINAL RULE & STRICT SCHEMA ENFORCEMENT
+                Dont add any extra fields or properties that are not defined in the schema.
                 
                 Return ONLY the JSON object matching the schema above.
                 Do not return any explanation, reasoning, markdown, comments, or surrounding text.

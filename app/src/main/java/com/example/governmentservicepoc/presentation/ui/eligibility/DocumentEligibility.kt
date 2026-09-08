@@ -38,7 +38,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.governmentservicepoc.presentation.ui.component.DynamicCircularProgressIndicator
+import com.example.governmentservicepoc.presentation.ui.ignore.component.DynamicCircularProgressIndicator
 import com.example.governmentservicepoc.presentation.viewmodel.DocumentEligibilityViewModel
 import com.example.governmentservicepoc.utils.isValidAadhaar
 import kotlinx.coroutines.flow.collectLatest

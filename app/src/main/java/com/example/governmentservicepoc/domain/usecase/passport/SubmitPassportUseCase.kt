@@ -5,6 +5,7 @@ import com.example.governmentservicepoc.domain.model.ApplicationRequest
 import com.example.governmentservicepoc.domain.model.PassportApplicationRequest
 import com.example.governmentservicepoc.domain.model.WorkflowContext
 import com.example.governmentservicepoc.domain.repository.CitizenRepository
+import com.example.governmentservicepoc.utils.AppConstants
 
 class SubmitPassportUseCase(
     private val repository: CitizenRepository,
@@ -15,18 +16,17 @@ class SubmitPassportUseCase(
         request: PassportApplicationRequest
     ): String {
 
-        val context =
-            WorkflowContext(
-                formData = mapOf(
-                    "fullName" to request.fullName,
-                    "dateOfBirth" to request.dateOfBirth,
-                    "address" to request.address,
-                    "nationality" to request.nationality,
-                    "aadhaar" to request.aadhaar,
-                    "mobileNumber" to request.mobileNumber,
-                    "email" to request.email
-                )
+        val context = WorkflowContext(
+            formData = mapOf(
+                AppConstants.FULL_NAME to request.fullName,
+                AppConstants.DATE_OF_BIRTH to request.dateOfBirth,
+                AppConstants.ADDRESS to request.address,
+                AppConstants.NATIONALITY to request.nationality,
+                AppConstants.AADHAAR_NUMBER to request.aadhaar,
+                AppConstants.MOBILE_NUMBER to request.mobileNumber,
+                AppConstants.EMAIL to request.email
             )
+        )
 
         val workflowSteps = listOf(
             "DOCUMENT_CHECK",

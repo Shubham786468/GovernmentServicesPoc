@@ -21,6 +21,10 @@ class GovernmentServiceTool {
                     - Annual Income
                     - Pan Card
                     - Gender
+                    
+                ActionButton: submitIncomeCertificate
+                    
+                Don't add any extra fields or properties that are not defined in the schema.
 
                 Workflow:
                     ELIGIBILITY
@@ -28,7 +32,6 @@ class GovernmentServiceTool {
                     APPROVAL
                     SUBMIT
 
-                Action: submitIncomeCertificate
                 """.trimIndent()
 
             "passport_certificate", "passport", "passport_application" ->
@@ -43,14 +46,17 @@ class GovernmentServiceTool {
                     - Aadhaar Number
                     - Mobile Number
                     - Address
-
+                    
+               ActionButton: submitPassportApplication
+                
+               Don't add any extra fields or properties that are not defined in the schema.
+               
                 Workflow:
                     DOCUMENT_CHECK
                     POLICE_VERIFICATION
                     PASSPORT_APPROVAL
                     SUBMIT
 
-                Action: submitPassportApplication
                 
                 """.trimIndent()
 

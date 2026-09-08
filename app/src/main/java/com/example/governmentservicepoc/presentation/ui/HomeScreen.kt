@@ -40,12 +40,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.governmentservicepoc.domain.model.ChatMessage
-import com.example.governmentservicepoc.presentation.state.DynamicUiState
-import com.example.governmentservicepoc.presentation.ui.component.WaveTypingIndicator
+import com.example.governmentservicepoc.presentation.ui.ignore.component.WaveTypingIndicator
 import com.example.governmentservicepoc.presentation.viewmodel.HomeScreenViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.compose
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds

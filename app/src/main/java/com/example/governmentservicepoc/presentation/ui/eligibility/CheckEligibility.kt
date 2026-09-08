@@ -1,7 +1,5 @@
 package com.example.governmentservicepoc.presentation.ui.eligibility
 
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +15,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.governmentservicepoc.presentation.ui.component.DynamicCircularProgressIndicator
+import com.example.governmentservicepoc.presentation.ui.ignore.component.DynamicCircularProgressIndicator
 import com.example.governmentservicepoc.presentation.viewmodel.EligibilityViewModel
 import com.example.governmentservicepoc.utils.isValidIncome
 import kotlinx.coroutines.flow.collectLatest

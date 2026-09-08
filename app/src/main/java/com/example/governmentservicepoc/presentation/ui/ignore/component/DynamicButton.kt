@@ -1,4 +1,4 @@
-package com.example.governmentservicepoc.presentation.ui.component
+package com.example.governmentservicepoc.presentation.ui.ignore.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.focusable

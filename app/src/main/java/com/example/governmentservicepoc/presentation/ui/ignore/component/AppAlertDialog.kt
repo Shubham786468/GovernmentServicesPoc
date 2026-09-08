@@ -1,4 +1,4 @@
-package com.example.governmentservicepoc.presentation.ui.component
+package com.example.governmentservicepoc.presentation.ui.ignore.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.governmentservicepoc.presentation.state.SubmissionState
 
 @Composable
 fun AppAlertDialog(
